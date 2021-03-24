@@ -10,7 +10,7 @@ See the License for the specific language governing permissions and
 limitations under the License.*/
 
 package main.java.practica2.dominio;
-/**
+/*
 * Esta clase es responsable de leer el tablero de un
 * fichero en forma de ceros y unos, ir transitando de
 * estados e ir mostrando dichos estados.
@@ -57,7 +57,7 @@ public class Tablero {
 
             for (int f = 1; f < DIMENSION+1; f++) {
                 for (int c = 1; c < DIMENSION+1; c++) {
-                    int vecinasVivas = estadoActual[f - 1][c - 1] + estadoActual[f - 1][j] + estadoActual[f - 1][c + 1]
+                    int vecinasVivas = estadoActual[f - 1][c - 1] + estadoActual[f - 1][c] + estadoActual[f - 1][c + 1]
                                 + estadoActual[f][c - 1] + estadoActual[f][c + 1] + estadoActual[f + 1][c - 1] +
                                 estadoActual[f + 1][c] + estadoActual[f + 1][c + 1];
                     if (estadoActual[f][c] == 1 && (vecinasVivas == 2 || vecinasVivas == 3)) {
