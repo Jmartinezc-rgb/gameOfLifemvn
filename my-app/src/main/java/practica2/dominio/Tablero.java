@@ -16,24 +16,21 @@ package main.java.practica2.dominio;
 * estados e ir mostrando dichos estados.
 */
 
-import java.io.File;
+import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 /**
- * @version final 16/03/2021
+ * @version final 24/03/2021
  * @author Javier Martínez
  */
 public class Tablero {
     private static int DIMENSION = 30;
-    //matriz que representa el estado actual.
     private int[][] estadoActual = new int[DIMENSION+2][DIMENSION+2];
-    // Matriz que representa el estado siguiente. 
     private int[][] estadoSiguiente = new int[DIMENSION+2][DIMENSION+2]; 
 
     /********************************************************
      * Lee el estado inicial de un fichero llamado ‘matriz‘.
      ********************************************************/
-
      // La secuencia de ceros y unos del fichero es guardada en ‘estadoActual‘ y, utilizando las reglas del juego de la vida,
     // se insertan los ceros y unos correspondientes en ‘estadoSiguiente‘.
 
@@ -43,19 +40,23 @@ public class Tablero {
      * el número es menor que 0,5, entonces la celda está
      * inicialmente viva. En caso contrario, está muerta.
      * Las variables f y c representan las filas y columnas de la matriz
+     * 
+     * Complejidad temporal: O(n log n)
+     * Complejidad espacial: O(1)
      *******************************************************/
     public void leerEstadoActual() {
+        FileReader fichero;
         try {
-            File fichero = new File ("matriz");
+            fichero = new FileReader("matriz");
             Scanner sc = new Scanner(fichero);
             for (int f = 0; f < DIMENSION; f++) {
-                String linea = sc.nextLine(); 
+                String linea = sc.nextLine();
                 for (int c = 0; c < DIMENSION; c++) {
-                    estadoActual[f+1][c+1] = Integer.parseInt(String.valueOf(linea.charAt(c)));
+                    estadoActual[f+1][c+1] = Character.getNumericValue(linea.charAt(c));
                 }
             }
 
-            for (int f = 1; f < DIMENSION+1; f++) {
+            for (int f = 1; f < DIMENSION+ 1; f++) {
                 for (int c = 1; c < DIMENSION+1; c++) {
                     int vecinasVivas = estadoActual[f - 1][c - 1] + estadoActual[f - 1][c] + estadoActual[f - 1][c + 1]
                                 + estadoActual[f][c - 1] + estadoActual[f][c + 1] + estadoActual[f + 1][c - 1] +
@@ -81,6 +82,9 @@ public class Tablero {
     /********************************************************
     * Transita al estado siguiente según las reglas del
     * juego de la vida.
+
+    * Complejidad temporal: O(n log n)
+    * Complejidad espacial: O(1)
     ********************************************************/
     public void generarEstadoActualPorMontecarlo() {
 
@@ -112,9 +116,11 @@ public class Tablero {
     /*******************************************************
     * Devuelve, en modo texto, el estado actual.
     * @return el estado actual.
+
+    * Complejidad temporal: O(n log n)
+    * Complejidad espacial: O(1)
     *******************************************************/
     public void transitarAlEstadoSiguiente() {
-        estadoActual = estadoSiguiente;
         estadoSiguiente = new int[DIMENSION+2][DIMENSION+2];
         for (int f = 1; f < DIMENSION+1; f++) {
             for (int c = 1; c < DIMENSION+1; c++) {
@@ -130,6 +136,7 @@ public class Tablero {
                 }
             }
         }
+        estadoActual = estadoSiguiente;
     }
     @Override
     public String toString() {

@@ -14,7 +14,7 @@ import main.java.practica2.dominio.*;
 import java.util.concurrent.TimeUnit;
 import java.lang.InterruptedException;
 /**
- * @version final 16/03/2021
+ * @version final 24/03/2021
  * @author Javier Martínez
  */
 public class Principal{
