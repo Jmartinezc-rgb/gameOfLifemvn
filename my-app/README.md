@@ -35,6 +35,7 @@ Javier Martinez Cristobal
 Para que el programa se ejecute necesita seguir las siguientes instrucciones:
 * 1-Comando mvn clean compile assembly:single
 * 2-Comando java -jar target/my-app-1.0-SNAPSHOT-jar-with-dependencies.jar (donde se encuentra nuestro archivo con extension .jar)
+
 En caso de que no funcione a través de Maven se deberá ejecutar:
 * 1- make ejecutar
 * 2- make jar
